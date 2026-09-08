@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rodrigo & Gema</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="countdown-badge" id="countdown">
+  <span class="countdown-label">💍 Faltan</span>
+  <div class="countdown-numbers">
+    <div><strong id="cd-days">0</strong><small>días</small></div>
+    <div><strong id="cd-hours">0</strong><small>horas</small></div>
+    <div><strong id="cd-mins">0</strong><small>min</small></div>
+  </div>
+</div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <p class="rings">💍</p>
+      <h2>Rodrigo<br>&amp; Gema</h2>
+      <p class="sidebar-date">16 de octubre de 2027</p>
+    </div>
+    <nav class="side-nav">
+      <button class="nav-btn active" data-tab="inicio">🏠 <span>Inicio</span></button>
+      <button class="nav-btn" data-tab="invitados">👰🤵 <span>Invitados</span></button>
+      <button class="nav-btn" data-tab="tareas">✅ <span>Tareas y Anotaciones</span></button>
+      <button class="nav-btn" data-tab="musica">🎵 <span>Música</span></button>
+      <button class="nav-btn" data-tab="mesas">🪑 <span>Mesas</span></button>
+      <button class="nav-btn" data-tab="timeline">⏱️ <span>Cronograma del día</span></button>
+      <button class="nav-btn" data-tab="gastos">💰 <span>Portal de Gastos</span></button>
+    </nav>
+
+    <div class="sidebar-tools">
+      <button id="btn-darkmode" class="tool-btn">🌙 Modo oscuro</button>
+    </div>
+
+    <div class="backup-box">
+      <button id="btn-export" class="backup-btn">⬇️ Exportar copia</button>
+      <label for="input-import" class="backup-btn">⬆️ Importar copia</label>
+      <input type="file" id="input-import" accept=".json" hidden>
+      <p class="backup-hint">Guarda tus datos antes de actualizar la web</p>
+    </div>
+  </aside>
+
+  <button class="hamburger" id="hamburger">☰</button>
+
+  <main class="content">
+
+    <!-- ================= INICIO ================= -->
+    <section id="inicio" class="tab-content active">
+      <h1 class="page-title">Resumen general</h1>
+      <p class="page-subtitle">Todo lo importante de un vistazo ✨</p>
+
+      <div class="dashboard-grid">
+        <div class="dash-card"><div class="dash-icon">👥</div><div><span id="dash-invitados">0</span><p>Invitados totales</p></div></div>
+        <div class="dash-card"><div class="dash-icon">✅</div><div><span id="dash-confirmados">0</span><p>Confirmados</p></div></div>
+        <div class="dash-card"><div class="dash-icon">💸</div><div><span id="dash-gastos">0 €</span><p>Gastos totales</p></div></div>
+        <div class="dash-card"><div class="dash-icon">💶</div><div><span id="dash-ingresos">0 €</span><p>Ingresos estimados</p></div></div>
+        <div class="dash-card" id="dash-balance-card"><div class="dash-icon">⚖️</div><div><span id="dash-balance">0 €</span><p>Balance estimado</p></div></div>
+        <div class="dash-card"><div class="dash-icon">🪑</div><div><span id="dash-mesas">0</span><p>Mesas creadas</p></div></div>
+      </div>
+
+      <div class="dashboard-lower">
+        <div class="dash-panel">
+          <h3>📋 Tareas pendientes (<span id="dash-tareas-count">0</span>)</h3>
+          <ul id="dash-tareas-list" class="mini-list"></ul>
+        </div>
+        <div class="dash-panel">
+          <h3>📝 Últimas anotaciones</h3>
+          <p id="dash-notas-preview" class="notas-preview">Sin anotaciones todavía...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INVITADOS ================= -->
+    <section id="invitados" class="tab-content">
+      <h1 class="page-title">Lista de Invitados</h1>
+
+      <div class="summary-cards">
+        <div class="card"><span id="total-invitados">0</span><p>Total invitados</p></div>
+        <div class="card"><span id="total-adultos">0</span><p>Adultos</p></div>
+        <div class="card"><span id="total-juniors">0</span><p>Juniors</p></div>
+        <div class="card"><span id="total-enviadas">0</span><p>Invitaciones enviadas</p></div>
+        <div class="card"><span id="total-confirmados">0</span><p>Confirmados</p></div>
+        <div class="card"><span id="total-pendientes">0</span><p>Pendientes respuesta</p></div>
+      </div>
+
+      <div class="toolbar-invitados">
+        <input type="text" id="buscador-invitados" placeholder="🔍 Buscar invitado por nombre o categoría...">
+        <button id="btn-export-csv" class="backup-btn small">⬇️ Exportar CSV</button>
+      </div>
+
+      <div class="columns">
+        <div class="column" id="col-novio">
+          <h3>🤵 Invitados del Novio (<span id="count-novio">0</span>)</h3>
+          <form class="add-form" data-side="novio">
+            <input type="text" placeholder="Nombre" class="input-nombre" required>
+            <select class="input-categoria">
+              <option>Familia</option><option>Casi Familia</option><option>Zacapa</option>
+              <option>Chavales</option><option>Cabañas</option><option>ICAI</option>
+              <option>Trabajo</option><option>Compromiso</option><option>Amigos</option>
+              <option>Cazorla</option><option>Otros</option>
+            </select>
+            <select class="input-tipo">
+              <option value="adulto">Adulto</option>
+              <option value="junior">Junior</option>
+            </select>
+            <button type="submit">+ Añadir</button>
+          </form>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Nombre</th><th>Categoría</th><th>Tipo</th><th>Alergias</th><th>Regalo</th><th>Invitación</th><th>Asistirá</th><th></th></tr></thead>
+              <tbody id="tbody-novio"></tbody>
+            </table>
+          </div>
+          <div class="category-summary">
+            <h4>📊 Resumen por categoría</h4>
+            <div class="table-wrapper small">
+              <table>
+                <thead><tr><th>Categoría</th><th>Total</th><th>Adultos</th><th>Juniors</th></tr></thead>
+                <tbody id="resumen-novio"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="column" id="col-novia">
+          <h3>👰 Invitados de la Novia (<span id="count-novia">0</span>)</h3>
+          <form class="add-form" data-side="novia">
+            <input type="text" placeholder="Nombre" class="input-nombre" required>
+            <select class="input-categoria">
+              <option>Familia</option><option>Amigas</option><option>Trabajo</option>
+              <option>Compromiso</option><option>Cazorla</option><option>ICAI</option>
+              <option>Cabañas</option><option>Chavales</option><option>Zacapa</option>
+              <option>Casi Familia</option><option>Otros</option>
+            </select>
+            <select class="input-tipo">
+              <option value="adulto">Adulto</option>
+              <option value="junior">Junior</option>
+            </select>
+            <button type="submit">+ Añadir</button>
+          </form>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Nombre</th><th>Categoría</th><th>Tipo</th><th>Alergias</th><th>Regalo</th><th>Invitación</th><th>Asistirá</th><th></th></tr></thead>
+              <tbody id="tbody-novia"></tbody>
+            </table>
+          </div>
+          <div class="category-summary">
+            <h4>📊 Resumen por categoría</h4>
+            <div class="table-wrapper small">
+              <table>
+                <thead><tr><th>Categoría</th><th>Total</th><th>Adultos</th><th>Juniors</th></tr></thead>
+                <tbody id="resumen-novia"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAREAS ================= -->
+    <section id="tareas" class="tab-content">
+      <h1 class="page-title">Tareas Pendientes</h1>
+      <form id="form-tarea" class="add-form">
+        <input type="text" id="input-tarea" placeholder="Nueva tarea..." required>
+        <select id="input-prioridad">
+          <option value="baja">Prioridad baja</option>
+          <option value="media" selected>Prioridad media</option>
+          <option value="alta">Prioridad alta</option>
+        </select>
+        <button type="submit">+ Añadir tarea</button>
+      </form>
+      <ul id="lista-tareas" class="task-list"></ul>
+      <h2>Anotaciones</h2>
+      <textarea id="anotaciones" placeholder="Escribe aquí notas, ideas, recordatorios..."></textarea>
+      <p class="hint">✏️ Se guarda automáticamente</p>
+    </section>
+
+    <!-- ================= MÚSICA ================= -->
+    <section id="musica" class="tab-content">
+      <div class="section-header-row">
+        <h1 class="page-title">Planificación Musical</h1>
+        <button id="btn-pdf-musica" class="backup-btn small">📄 Exportar PDF</button>
+      </div>
+      <div class="music-columns">
+        <div class="music-col">
+          <h3>🎧 Canciones DJ</h3>
+          <form class="add-form music-form" data-list="dj"><input type="text" placeholder="Añadir canción..." required><button type="submit">+</button></form>
+          <ul class="song-list" id="list-dj"></ul>
+        </div>
+        <div class="music-col">
+          <h3>⛪ Canciones Iglesia</h3>
+          <form class="add-form music-form" data-list="iglesia"><input type="text" placeholder="Añadir canción / momento..." required><button type="submit">+</button></form>
+          <ul class="song-list" id="list-iglesia"></ul>
+        </div>
+        <div class="music-col">
+          <h3>💃 Grupo Flamenco</h3>
+          <form class="add-form music-form" data-list="flamenco"><input type="text" placeholder="Añadir tema..." required><button type="submit">+</button></form>
+          <ul class="song-list" id="list-flamenco"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MESAS ================= -->
+    <section id="mesas" class="tab-content">
+      <div class="section-header-row">
+        <h1 class="page-title">Distribución de Mesas</h1>
+        <button id="btn-pdf-mesas" class="backup-btn small">📄 Exportar PDF (lista)</button>
+      </div>
+      <p class="hint">✏️ En <strong>Vista lista</strong>: arrastra el icono ⠿ de una mesa sobre otra para reordenarlas. En <strong>Vista mapa</strong>: arrastra el título o círculo central para mover la mesa entera, o arrastra un invitado entre sillas para cambiarlo de sitio.</p>
+
+      <div class="mesas-header">
+        <form id="form-mesa" class="add-form">
+          <input type="text" id="input-mesa-nombre" placeholder="Nombre mesa (ej. Mesa 1)" required>
+          <input type="number" id="input-mesa-capacidad" placeholder="Capacidad" min="1" value="10" required>
+          <button type="submit">+ Crear mesa</button>
+        </form>
+
+        <div class="sin-mesa-box" id="sin-mesa-dropzone">
+          <h4>Invitados sin mesa (<span id="count-sin-mesa">0</span>)</h4>
+          <div class="mesa-filters">
+            <input type="text" id="mesa-buscador" placeholder="🔍 Buscar por nombre...">
+            <select id="mesa-filtro-lado">
+              <option value="todos">Todos (Novio y Novia)</option>
+              <option value="novio">Solo Novio</option>
+              <option value="novia">Solo Novia</option>
+            </select>
+            <select id="mesa-filtro-categoria">
+              <option value="todas">Todas las categorías</option>
+            </select>
+          </div>
+          <div id="lista-sin-mesa" class="chip-list"></div>
+        </div>
+      </div>
+
+      <div class="mesas-view-toggle">
+        <button id="btn-vista-lista" class="view-toggle-btn active">📋 Vista lista</button>
+        <button id="btn-vista-mapa" class="view-toggle-btn">🗺️ Vista mapa (arrastrar)</button>
+      </div>
+
+      <div id="plano-mesas" class="plano-mesas"></div>
+      <div id="mapa-mesas" class="mapa-mesas" style="display:none;"></div>
+    </section>
+
+    <!-- ================= TIMELINE ================= -->
+    <section id="timeline" class="tab-content">
+      <h1 class="page-title">Cronograma del Día</h1>
+      <p class="page-subtitle">Horario minuto a minuto del 16 de octubre de 2027</p>
+
+      <div class="summary-cards">
+        <div class="card"><span id="timeline-total-eventos">0</span><p>Eventos programados</p></div>
+      </div>
+
+      <form id="form-timeline" class="add-form">
+        <input type="time" id="timeline-hora" required>
+        <input type="text" id="timeline-evento" placeholder="Evento (ej. Llegada invitados a la iglesia)" required>
+        <button type="submit">+ Añadir al cronograma</button>
+      </form>
+
+      <ul id="lista-timeline" class="timeline-list"></ul>
+    </section>
+
+    <!-- ================= GASTOS ================= -->
+    <section id="gastos" class="tab-content">
+      <h1 class="page-title">Portal de Gastos</h1>
+
+      <div class="summary-cards">
+        <div class="card"><span id="total-gastos">0 €</span><p>Total gastos</p></div>
+        <div class="card"><span id="total-ingresos-est">0 €</span><p>Ingresos estimados</p></div>
+        <div class="card" id="balance-card"><span id="balance">0 €</span><p>Balance</p></div>
+        <div class="card"><span id="total-pagado">0 €</span><p>Total pagado</p></div>
+        <div class="card"><span id="total-pendiente-pago">0 €</span><p>Pendiente de pagar</p></div>
+      </div>
+
+      <h2>🍽️ Catering (pago por persona)</h2>
+      <div class="catering-card">
+        <div class="catering-row">
+          <label for="input-catering-precio">Precio por persona (€):</label>
+          <input type="number" id="input-catering-precio" value="170">
+        </div>
+        <div class="catering-info">
+          <span id="catering-personas">0</span> personas estimadas × <span id="catering-precio-display">170</span> € =
+          <strong id="catering-total">0 €</strong>
+        </div>
+        <label class="checkbox-label"><input type="checkbox" id="catering-pagado"> Marcar como pagado</label>
+        <p class="hint">Se calcula con todos los invitados que no hayan marcado "No asiste".</p>
+      </div>
+
+      <div id="gastos-conceptos-container"></div>
+
+      <h2>Ingresos estimados por categoría de invitado</h2>
+      <p class="hint">Basado en el nº de invitados de cada categoría × aportación estimada por persona. Editable.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Categoría</th><th>Nº invitados</th><th>€ por persona</th><th>Total €</th></tr></thead>
+          <tbody id="tbody-ingresos"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
