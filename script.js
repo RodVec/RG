@@ -150,7 +150,7 @@ document.getElementById('hamburger').addEventListener('click', () => {
 // CUENTA ATRÁS
 // ============================================================
 function updateCountdown() {
-  const target = new Date('2027-10-16T00:00:00');
+  const target = new Date('2027-07-10T00:00:00');
   let diff = Math.max(0, target - new Date());
   document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
   document.getElementById('cd-hours').textContent = Math.floor((diff / 3600000) % 24);
@@ -427,7 +427,7 @@ document.getElementById('btn-pdf-musica').addEventListener('click', exportMusica
 
 function exportMusicaPDF() {
   const secciones = [['dj','🎧 Canciones DJ'],['iglesia','⛪ Canciones Iglesia'],['flamenco','💃 Grupo Flamenco']];
-  let body = `<h1>🎵 Planificación Musical</h1><p class="meta">Rodrigo &amp; Gema · 16 de octubre de 2027</p>`;
+  let body = `<h1>🎵 Planificación Musical</h1><p class="meta">Rodrigo &amp; Gema · 10 de julio de 2027</p>`;
   secciones.forEach(([key, label]) => {
     body += `<h2>${label}</h2>`;
     if (musica[key].length === 0) {
@@ -772,7 +772,7 @@ document.getElementById('form-mesa').addEventListener('submit', e => {
 // ============================================================
 function exportMesasPDF() {
   const all = getAllGuests();
-  let body = `<h1>💍 Distribución de Mesas</h1><p class="meta">Rodrigo &amp; Gema · 16 de octubre de 2027 · ${mesas.length} mesas · ${all.filter(g=>g.mesa).length} invitados asignados</p>`;
+  let body = `<h1>💍 Distribución de Mesas</h1><p class="meta">Rodrigo &amp; Gema · 10 de julio de 2027 · ${mesas.length} mesas · ${all.filter(g=>g.mesa).length} invitados asignados</p>`;
 
   mesas.forEach(mesa => {
     const asignados = all.filter(g => g.mesa === mesa.id);
@@ -824,7 +824,7 @@ function exportMapaPDF() {
 
   const body = `
     <h1>🗺️ Mapa de Mesas</h1>
-    <p class="meta">Rodrigo &amp; Gema · 16 de octubre de 2027 · ${mesas.length} mesas</p>
+    <p class="meta">Rodrigo &amp; Gema · 10 de julio de 2027 · ${mesas.length} mesas</p>
     <div class="pdf-mapa-grid">${tablesHtml}</div>
   `;
 
